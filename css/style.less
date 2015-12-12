@@ -1,0 +1,141 @@
+body {
+	background: #222;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.c-logo {
+	position: absolute;
+	top: 5px;
+	left: 0;
+	height: 20px;
+	width: 200px;
+	text-align: center;
+	font-weight: 100;
+	font-size: 20px;
+	color: #fff;
+	-webkit-app-region: drag
+}
+
+.c-exit {
+	position: absolute;
+	top: 0;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	color: #fff;
+	right: 0;
+	padding-top: 5px;
+	cursor: pointer;
+}
+
+.c-exit:hover {
+	background: rgba(0,0,0,.7);
+}
+
+.c-tabs {
+	position: absolute;
+	top: 0;
+	left: 200px;
+	right: 20px;
+	height: 30px;
+}
+
+.c-tabs .tab {
+	display: inline-block;
+	width: 100px;
+	text-align: center;
+	color: #ddd;
+	padding-top: 5px;
+	cursor: pointer;
+	position: relative;
+	margin-right: 10px;
+	padding-bottom: 4px;
+}
+
+.c-tabs .tab.active {
+	border-bottom: 3px solid #49a;
+}
+
+.c-tabs .tab .close {
+	position: absolute;
+	right: 1px;
+	top: 7px;
+	color: #777;
+	visibility: hidden;
+}
+.c-tabs .tab:hover {
+	color: #fff;
+}
+.c-tabs .tab:hover .close {
+	visibility: visible;
+}
+
+.c-tabs .tab .close:hover {
+	color: #aaa;
+}
+
+@import "./tabs.less";
+
+.c-content {
+	position: absolute;
+	top: 30px;
+	right: 0;
+	left: 200px;
+	bottom: 20px;
+	background: #333;
+}
+
+.c-footer {
+	position: absolute;
+	height: 16px;
+	bottom: 0;
+	padding-left: 20px;
+	padding-top: 4px;
+	font-size: 12px;
+	right: 0;
+	left: 0;
+	background: #49a;
+	color: #fff;
+}
+
+.c-sidebar {
+	position: absolute;
+	overflow: auto;
+	top: 30px;
+	left: 0;
+	bottom: 20px;
+	width: 200px;
+}
+.c-sidebar h4 {
+	margin: 0;
+	color: #aaa;
+	font-weight: 100;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.c-sidebar h4:hover {
+	background: rgba(255, 255, 255, .05)
+}
+
+.c-sidebar h4 span {
+	padding-left: 5px;
+}
+
+.c-sidebar .type {
+	color: #666;
+}
+
+.c-sidebar ul {
+	margin: 0;
+	padding: 0;
+}
+
+.c-sidebar li {
+	margin-left: 10px;
+	list-style: none;
+}
+
+.c-sidebar .folder {
+	
+}
