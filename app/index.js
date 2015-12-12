@@ -26,9 +26,11 @@ App.on('openFile', (file, menuCollection) => {
 	const content = Fs.readFileSync(FilePath);
 	console.log('>> readfile ', FilePath);
 	console.log('>> content:', content);
-	Tabs.add({name: file, reader: new FlatView({model: 
+	const reader = new FlatView({model:
 		new ContentModel({content})
-	})});
+	});
+	reader.render();
+	Tabs.add({name: file, reader: reader});
 });
 
 var dirTree = require('directory-tree');
@@ -41,5 +43,5 @@ App.rootView.sidebar.show(new TreeView({
 }));
 
 App.on('setContent', (plugin) => {
-	App.rootView.content.show(plugin);
+	App.rootView.content.$el.html(plugin.el);
 });
