@@ -1,5 +1,4 @@
 var ItemView = require('backbone.marionette').ItemView;
-
 var t = require('../../t');
 
 var TabView = ItemView.extend({
@@ -21,17 +20,12 @@ var TabView = ItemView.extend({
 	},
 
     fieldsChanged: function() {
-		console.log('field changed >>>');
-        this.render();
-    },
-	onRender() {
-		console.log('on render >>');
 		if (this.model.get('active')) {
 			this.$el.addClass('active');
 		} else {
 			this.$el.removeClass('active');
 		}
-	}
+    }
 });
 
 module.exports = TabView;

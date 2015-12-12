@@ -1,5 +1,6 @@
 const {CompositeView} = require('backbone.marionette');
 const t = require('../t');
+const app = require('../app');
 
 const {Collection} = require('backbone');
 
@@ -20,8 +21,7 @@ const FolderView = CompositeView.extend({
 		if (this.model.get('type') == 'directory') {
 			this.$el.find('ul').eq(0).slideToggle(300);
 		} else {
-			this.collection.add({name: 'submodule', type:"sub"}, 
-			{name: 'submodule', type:"sub"});
+			app.trigger('openFile', this.model.get('path'), this.collection);
 		}
 	}
 })

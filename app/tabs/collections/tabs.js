@@ -1,5 +1,7 @@
-var Collection = require('backbone').Collection;
+const Collection = require('backbone').Collection;
 
-var TBs = Collection.extend({});
+const TabModel = require('../models/tab');
+
+const TBs = Collection.extend({model: TabModel});
 
 module.exports = TBs;
