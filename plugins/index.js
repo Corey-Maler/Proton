@@ -1,6 +1,7 @@
 const Flat = require('./flat');
 const types = {};
 types.bproj = require('./bproj');
+types.com = require('./com');
 
 
 const resolve = function(ext, opts) {

@@ -37,19 +37,20 @@ App.on('doOpenProject', () => {
 App.rootView.exit.show(new ExitView());
 App.rootView.tabs.show(Tabs);
 
-App.on('openFile', (file, menuCollection) => {
-	console.log('>>> Open file', file, menuCollection);
+App.on('openFile', (file, menuCollection, menuItem) => {
 	const FilePath = Path.resolve(App.rootDir, file);
-	const content = Fs.readFileSync(FilePath);
-	console.log('>> readfile ', FilePath);
-	console.log('>> content:', content);
 	const reader = Readers(Path.extname(file), {model: new ContentModel({file: FilePath})});
 	reader.render();
-	Tabs.add({name: file, reader: reader});
+	const tab = Tabs.add({name: file, reader: reader});
+	menuItem.set('tab', tab);
 });
 
+App.on('openTab', (tab) => {
+	Tabs.select({model: tab});
+})
+
 App.on('setContent', (plugin) => {
-	App.rootView.content.$el.html(plugin.el);
+	App.rootView.content.$el.empty().append(plugin.el);
 });
 
 function RunApp() {
@@ -74,7 +75,6 @@ if (!projPath) {
 
 $(window).keypress(function(event) {
     if (!(event.which == 115 && event.ctrlKey) && !(event.which == 19)) return true;
-    console.log('tabs >> current >> ', Tabs.getCurrent());
 		const current = Tabs.getCurrent();
 		current.set('changed', false);
 		current.get('page').reader.save();

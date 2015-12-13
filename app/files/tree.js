@@ -20,7 +20,12 @@ const FolderView = CompositeView.extend({
 		if (this.model.get('type') == 'directory') {
 			this.$el.find('ul').eq(0).slideToggle(300);
 		} else {
-			app.trigger('openFile', this.model.get('path'), this.collection);
+			let tab = this.model.get('tab');
+			if (tab) {
+				app.trigger('openTab', tab);
+			} else {
+				app.trigger('openFile', this.model.get('path'), this.collection, this.model);
+			}
 		}
 	}
 })

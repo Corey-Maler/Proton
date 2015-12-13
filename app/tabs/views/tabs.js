@@ -17,6 +17,7 @@ module.exports = CollectionView.extend({
 		const tab = new TabModel({title: Page.name, page: Page});
 		this.collection.add(tab);
 		this.select({model: tab});
+		return tab;
 	},
 	getCurrent() {
 		const current = this.collection.where({active: true});
