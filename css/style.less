@@ -60,6 +60,23 @@ body {
 	margin-right: 10px;
 	padding-bottom: 4px;
 	padding-right: 15px;
+	padding-left: 10px;
+}
+
+.c-tabs .tab::after {
+	content: "";
+	position: absolute;
+	top: 12px;
+	left: 3px;
+	width: 6px;
+	height: 6px;
+	background: rgba(34, 150, 210, 0);
+	border-radius: 100%;
+	transition: all .3s ease; 
+}
+
+.c-tabs .tab.changed::after {
+	background: rgba(34, 150, 210, 1);
 }
 
 .c-tabs .tab.active {

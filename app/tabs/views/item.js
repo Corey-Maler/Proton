@@ -12,20 +12,25 @@ var TabView = ItemView.extend({
     },
 
 	events: {
-		'click': 'select'	
-	},
-	
-	select() {
-		this.triggerMethod('select');	
+		'click': 'select'
 	},
 
-    fieldsChanged: function() {
+	select() {
+		this.triggerMethod('select');
+	},
+
+  fieldsChanged: function() {
 		if (this.model.get('active')) {
 			this.$el.addClass('active');
 		} else {
 			this.$el.removeClass('active');
 		}
-    }
+		if (this.model.get('changed')) {
+			this.$el.addClass('changed');
+		} else {
+			this.$el.removeClass('changed');
+		}
+	}
 });
 
 module.exports = TabView;

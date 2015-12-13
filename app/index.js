@@ -16,6 +16,8 @@ const dialog = remote.require('dialog');
 const App = require('./app');
 const Readers = require('../plugins');
 
+const $ = require('jquery');
+
 App.rootView = new RootView();
 
 let projPath = localStorage.projPath;
@@ -41,7 +43,7 @@ App.on('openFile', (file, menuCollection) => {
 	const content = Fs.readFileSync(FilePath);
 	console.log('>> readfile ', FilePath);
 	console.log('>> content:', content);
-	const reader = Readers(Path.extname(file), {model: new ContentModel({content})});
+	const reader = Readers(Path.extname(file), {model: new ContentModel({file: FilePath})});
 	reader.render();
 	Tabs.add({name: file, reader: reader});
 });
@@ -69,3 +71,13 @@ if (!projPath) {
 } else {
 	RunApp();
 }
+
+$(window).keypress(function(event) {
+    if (!(event.which == 115 && event.ctrlKey) && !(event.which == 19)) return true;
+    console.log('tabs >> current >> ', Tabs.getCurrent());
+		const current = Tabs.getCurrent();
+		current.set('changed', false);
+		current.get('page').reader.save();
+    event.preventDefault();
+    return false;
+});
