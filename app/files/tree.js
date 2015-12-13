@@ -17,7 +17,6 @@ const FolderView = CompositeView.extend({
 	},
 	select(e) {
 		e.stopPropagation();
-		console.log('selected', this.model, this.$el.find('ul'));
 		if (this.model.get('type') == 'directory') {
 			this.$el.find('ul').eq(0).slideToggle(300);
 		} else {

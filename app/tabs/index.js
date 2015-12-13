@@ -1,6 +1,6 @@
 var TabCollection = require('./collections/tabs');
 
-var tt = new TabCollection([{title: 'a', active: true}, {title: 'b'}]);
+var tt = new TabCollection([]);
 
 var ItemView = require('./views/item');
 var ListView = require('./views/tabs');

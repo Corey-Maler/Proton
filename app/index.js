@@ -5,7 +5,7 @@ var ExitView = require('./views/exitView');
 const Path = require('path');
 const Fs = require('fs');
 
-const {Collection} = require('backbone');
+const {Collection, Model} = require('backbone');
 const ContentModel = require('./contentModel');
 
 const FlatView = require('../plugins/flat');
@@ -15,6 +15,24 @@ const TreeView = require('./files');
 const App = require('./app');
 
 App.rootView = new RootView();
+
+App.on('doOpenProject', () => {
+	console.log('open project');
+	var remote = require('remote');
+  var dialog = remote.require('dialog');
+	dialog.showOpenDialog({ filters: [
+   { name: 'Proton project', extensions: ['bproj'] }
+ ]}, function (fileNames) {
+	  if (fileNames === undefined) return;
+	  var fileName = fileNames[0];
+	  Fs.readFile(fileName, 'utf-8', function (err, data) {
+	    console.log('project opened >>> ', data)
+	  });
+ 	});
+});
+
+// resolve path
+App.projFilePath = "";
 App.rootDir = Path.resolve(__dirname);
 
 App.rootView.exit.show(new ExitView());
@@ -38,7 +56,10 @@ var tree = dirTree.directoryTree(__dirname);
 
 console.log('>>>', tree);
 
+App.project = new Model({projectName: 'my project'});
+
 App.rootView.sidebar.show(new TreeView({
+	model: App.project,
 	collection: new Collection(tree)
 }));
 

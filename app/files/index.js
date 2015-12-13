@@ -1,10 +1,17 @@
 const FolderView = require('./tree');
-const {CollectionView} = require('backbone.marionette');
+const {CompositeView} = require('backbone.marionette');
 const Backbone = require('backbone');
+const t = require('../t');
+const app = require('../app');
 
-var MotherView = CollectionView.extend({
+var MotherView = CompositeView.extend({
     childView: FolderView,
-    tagName: 'ul'
+    tagName: 'ul',
+    template: t('rootFile'),
+    childViewContainer: '.children',
+    events: {
+      'click .js-open-project': function() { app.trigger('doOpenProject') }
+    }
 });
 
 module.exports = MotherView;
