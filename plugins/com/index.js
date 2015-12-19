@@ -3,12 +3,42 @@ const $ = require('jquery');
 const {Model} = require('backbone');
 const t = require('../../app/t');
 
+const App = require('../../app/app');
+
 const SerialPort = require('serialport');
 
 const ProjectFile = ItemView.extend({
 	template: t('plugins/com'),
   initialize() {
     this.refresh();
+		console.log('COM initialize >>>', this);
+		const settings = JSON.parse(this.model.get('content'));
+		this.model.set('settings', settings);
+		let COM;
+		if (port = settings.port) {
+			const serialPort = new SerialPort.SerialPort(port, {
+	      baudrate: 9600
+	    }, false); // this is the openImmediately flag [default is true]
+	    this.serialPort = serialPort;
+	    serialPort.open((error) => {
+	      if ( error ) {
+	        console.log('failed to open: '+error);
+	      } else {
+					this.provider = {
+						write: (d) => {
+							this.writeToTerm(d);
+							this.serialPort.write(d, (e, r) => {});
+						}
+					}
+	        console.log('SERIAL PORT OPENED, provider setted');
+					App.addProvider('COM', this.provider);
+	        serialPort.on('data', (data) => {
+	          this.writeToTerm(data);
+
+	        });
+	      }
+	    });
+		}
   },
   events: {
     'click .js-send-on': 'sendOn',
@@ -53,9 +83,17 @@ const ProjectFile = ItemView.extend({
       if ( error ) {
         console.log('failed to open: '+error);
       } else {
-        console.log('open');
+				this.provider = {
+					write: (d) => {
+						this.writeToTerm(d);
+						this.serialPort.write(d, (e, r) => {});
+					}
+				}
+        console.log('SERIAL PORT OPENED, provider setted');
+				App.addProvider('COM', this.provider);
         serialPort.on('data', (data) => {
           this.writeToTerm(data);
+
         });
       }
     });

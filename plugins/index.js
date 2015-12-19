@@ -2,6 +2,7 @@ const Flat = require('./flat');
 const types = {};
 types.bproj = require('./bproj');
 types.com = require('./com');
+types.ssbus = require('./ssbus');
 
 
 const resolve = function(ext, opts) {
