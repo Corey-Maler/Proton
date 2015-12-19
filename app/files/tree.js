@@ -11,12 +11,16 @@ const FolderView = CompositeView.extend({
 	className: 'folder',
 	initialize: function() {
 		this.collection = new Collection(this.model.get('children'));
+		if (app.project.get('autoopen').indexOf(this.model.get('name')) >= 0) {
+			this.select();
+		}
 	},
 	events: {
 		'click h4': 'select'
 	},
 	select(e) {
-		e.stopPropagation();
+		if (e)
+			e.stopPropagation();
 		if (this.model.get('type') == 'directory') {
 			this.$el.find('ul').eq(0).slideToggle(300);
 		} else {
