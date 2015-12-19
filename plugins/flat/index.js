@@ -5,7 +5,7 @@ const FlatFile = ItemView.extend({
 	template: false,
 	onRender() {
 		this.$el.text(this.model.get('content'));
-		this.$el.addClass('fillContainer');
+		this.$el.css({height: '300px'});
 		console.log('Ace', Ace, ace)
 		this.editor = ace.edit(this.el);
 	}

@@ -13,9 +13,8 @@ const ProjectFile = ItemView.extend({
     'keyup .js-proj-name': 'changeName'
   },
   changeName(e) {
-    console.log('ON CHANGE');
     this.project.set('projectName', e.currentTarget.value);
-    this.trigger('changed');
+		this.model.set('content', JSON.stringify(this.project.toJSON()));
   },
 	onRender() {
 		this.$el.find('.js-proj-name').val(this.project.get('projectName'));

@@ -3,14 +3,6 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-.fillContainer {
-	position: absolute !important;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-}
-
 .c-logo {
 	position: absolute;
 	top: 5px;
@@ -40,10 +32,18 @@ body {
 	background: rgba(0,0,0,.7);
 }
 
-.c-tabs {
+.c-window {
 	position: absolute;
 	top: 0;
 	left: 200px;
+	right: 0;
+	bottom: 20px;
+}
+
+.c-tabs {
+	position: absolute;
+	top: 0;
+	left: 0px;
 	right: 20px;
 	height: 30px;
 	overflow-x: auto;
@@ -107,9 +107,9 @@ body {
 	position: absolute;
 	top: 30px;
 	right: 0;
-	left: 200px;
-	bottom: 20px;
-	background: #333;
+	left: 0px;
+	bottom: 0px;
+	overflow-y: auto;
 }
 
 .c-footer {
@@ -188,4 +188,17 @@ body {
 	border: 1px solid #666;
 	min-height: 300px;
 	color: #fff;
+}
+
+.window-item {
+	margin: 10px;
+  box-shadow: 0 0 3px 0 #111;
+  padding: 5px;
+  background: #111;
+	min-height: 100px;
+	position: relative;
+}
+
+.window-item:hover {
+	box-shadow: 0 0 3px 0 #6aa;
 }

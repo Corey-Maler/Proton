@@ -1,13 +1,6 @@
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
-var sp = require('serialport');
-
-  sp.list(function(err, ports) {
-    console.log(ports);
-  });
-
-
 // Report crashes to our server.
 require('crash-reporter').start();
 

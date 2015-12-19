@@ -9,7 +9,7 @@ const Fs = require('fs');
 const ContentModel = require('./contentModel');
 
 const FlatView = require('../plugins/flat');
-const Tabs = require('./tabs');
+const Window = require('./window');
 const TreeView = require('./files');
 const remote = require('remote');
 const dialog = remote.require('dialog');
@@ -35,22 +35,15 @@ App.on('doOpenProject', () => {
 });
 
 App.rootView.exit.show(new ExitView());
-App.rootView.tabs.show(Tabs);
+App.rootView.window.show(Window);
 
 App.on('openFile', (file, menuCollection, menuItem) => {
 	const FilePath = Path.resolve(App.rootDir, file);
-	const reader = Readers(Path.extname(file), {model: new ContentModel({file: FilePath})});
+	const fileModel = new ContentModel({file: FilePath});
+	const reader = Readers(Path.extname(file), {model: fileModel});
 	reader.render();
-	const tab = Tabs.add({name: file, reader: reader});
+	const tab = Window.add({name: file, fileModel, readerView: reader});
 	menuItem.set('tab', tab);
-});
-
-App.on('openTab', (tab) => {
-	Tabs.select({model: tab});
-})
-
-App.on('setContent', (plugin) => {
-	App.rootView.content.$el.empty().append(plugin.el);
 });
 
 function RunApp() {

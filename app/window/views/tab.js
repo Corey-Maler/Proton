@@ -5,11 +5,12 @@ var TabView = ItemView.extend({
 	template: t('common/tab'),
 	className: 'tab',
 	initialize(opts) {
-		console.log('a', opts, this, this.model);
+		console.log('tab view initialize', opts, this, this.model);
 	},
+
 	modelEvents: {
         'change': 'fieldsChanged'
-    },
+  },
 
 	events: {
 		'click': 'select'
