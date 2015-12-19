@@ -10,18 +10,20 @@ const ProjectFile = ItemView.extend({
 	template: t('plugins/ssbus'),
   initialize() {
     console.log('ssbus initialize >>> ', this);
-    this.provider = App.getProvider('COM');
+    this.COM = App.getProvider('COM');
+    const syb = new Model({type: 'sub', name: 'controller', provider: this});
+    this.model.get('subsystems').add(syb);
   },
   events: {
     'click .js-on': 'doOn',
     'click .js-off': 'doOff',
   },
   doOn() {
-    this.provider.write("1");
+    this.COM.write("1");
     console.log("ON!");
   },
   doOff() {
-    this.provider.write("0");
+    this.COM.write("0");
     console.log("OFF!");
   }
 });

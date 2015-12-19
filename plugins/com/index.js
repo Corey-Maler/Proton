@@ -30,6 +30,8 @@ const ProjectFile = ItemView.extend({
 							this.serialPort.write(d, (e, r) => {});
 						}
 					}
+					const syb = new Model({type: 'sub', name: port, provider: this.provider});
+			    this.model.get('subsystems').add(syb);
 	        console.log('SERIAL PORT OPENED, provider setted');
 					App.addProvider('COM', this.provider);
 	        serialPort.on('data', (data) => {

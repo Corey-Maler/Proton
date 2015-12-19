@@ -39,7 +39,7 @@ App.rootView.window.show(Window);
 
 App.on('openFile', (file, menuCollection, menuItem) => {
 	const FilePath = Path.resolve(App.rootDir, file);
-	const fileModel = new ContentModel({file: FilePath});
+	const fileModel = new ContentModel({file: FilePath, subsystems: menuCollection});
 	const reader = Readers(Path.extname(file), {model: fileModel});
 	reader.render();
 	const tab = Window.add({name: file, fileModel, readerView: reader});
