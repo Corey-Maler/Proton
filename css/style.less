@@ -209,3 +209,77 @@ h4.type_sub {
 	padding: 1px 3px;
   border-radius: 4px;
 }
+
+.blueprint {
+  position: relative; 
+  min-height: 600px;
+}
+
+.blueprint .childs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+}
+
+.blueprint .links {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.blueprint-element {
+  position: absolute;
+  border: 1px solid #666666;
+  background: #333;
+  min-width: 100px;
+  min-height: 70px;
+  cursor: pointer;
+}
+
+.blueprint .input, .blueprint .output {
+  //position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 100%;
+  background: #fff;
+  border: 3px solid rgba(255, 255, 255, .3);
+  background-clip: padding-box;
+  margin: 3px;
+  transition: all .3s;
+}
+
+.blueprint .input:hover, .blueprint .output:hover {
+  border-color: #fff;
+}
+
+.blueprint .inputs, .blueprint .outputs {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.blueprint .inputs {
+  left: 0;
+}
+
+.blueprint .outputs {
+  right: 0;
+}
+
+.blueprint .headline {
+  color: #aaa;
+  border-bottom: 1px solid #666;
+  text-align: center;
+}
+
+.blueprint .content {
+  position: relative;
+  height: 60px;
+}

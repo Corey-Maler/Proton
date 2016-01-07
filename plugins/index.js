@@ -3,6 +3,7 @@ const types = {};
 types.bproj = require('./bproj');
 types.com = require('./com');
 types.ssbus = require('./ssbus');
+types.blueprint = require('./blueprint');
 
 
 const resolve = function(ext, opts) {
