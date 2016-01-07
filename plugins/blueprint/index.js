@@ -14,7 +14,7 @@ let s;
 const genPath = function(x1, y1, x2, y2) {
   let mx1 = (x1 + x2) / 2;
   let mx2 = mx1;
-  if (x1 > x2) {
+  if (x2 - x1 < 100) {
     mx1 = x1 + 50;
     mx2 = x2 - 50;
   }
@@ -23,10 +23,27 @@ const genPath = function(x1, y1, x2, y2) {
 
 const ports = {};
 
+let CON = false;
+
 const links = {
   putPort(inp, port) {
     console.log('inp >> ', inp, port);
     ports[port] = inp;
+  
+    inp.$el.on('click', (e) => {
+      e.preventDefault();
+      if (!CON) {
+        CON = inp;
+      } else {
+        link(CON, inp);
+        CON = null;
+      }
+    });
+
+    inp.$el.on('mousedown', () => {
+      return false;
+    });
+
   },
 
   a: 3,
@@ -107,7 +124,7 @@ const ProjectFile = CompositeView.extend({
     console.log('may be here linking');
 
     setTimeout(() => {
-      link(ports['a:a:a'], ports['a:a:b']);
+      //link(ports['a:a:a'], ports['a:a:b']);
     }, 10); 
   },
 });

@@ -27,17 +27,15 @@ const ElementView = LayoutView.extend({
         left: pos[0] + 'px',
       });
 
-    if (this.model.get('a') === 2) {  
-      this.magic = new InOuts({collection: new Collection([{title: 'asd', rr: 'b'}]),
+      this.magic1 = new InOuts({
+        collection: new Collection([{title: 'asd', rr: 'b'}, {title: 'add', rr: 'g'}, {title: 'ad', rr: '3'}]),
         childViewOptions: {links: this.links},
       });
-      this.inputs.show(this.magic);
-    } else {
-      this.magic = new InOuts({collection: new Collection([{title: 'asd', rr: 'a'}]),
+      this.inputs.show(this.magic1);
+      this.magic = new InOuts({collection: new Collection([{title: 'asd', rr: 'a'}, {'title': 'gasdf', rr: 'd'}]),
         childViewOptions: {links: this.links},
       });
       this.outputs.show(this.magic);
-    }
 
   },
   events: {
@@ -78,6 +76,10 @@ const ElementView = LayoutView.extend({
     this.magic.children.each(m => {
       m.trigger('moved');
     });
+    this.magic1.children.each(m => {
+      m.trigger('moved');
+    });
+
 
 
     //this.triggerMethod('elementMove', offset.left - dx, offset.top - dy);
