@@ -23,6 +23,9 @@ const genPath = function(x1, y1, x2, y2) {
 
 const ports = {};
 
+let BBB;
+let connectionPath;
+
 let CON = false;
 
 const links = {
@@ -34,10 +37,23 @@ const links = {
       e.preventDefault();
       if (!CON) {
         CON = inp;
+        connectionPath.attr({stroke: '#afa'});
+        const gg = inp.$el.offset();
+        // fix blink on new connection
+        const offset = BBB.offset();
+        const aa = genPath(gg.left - offset.left + 6, gg.top - offset.top + 6, gg.left - offset.left + 6, gg.top - offset.top + 6);
+        connectionPath.attr('d', aa);
+        BBB.on('mousemove', (ex) => {
+          const aa = genPath(gg.left - offset.left + 6, gg.top - offset.top + 6, ex.pageX - offset.left, ex.pageY - offset.top);
+          connectionPath.attr('d', aa);
+        });
       } else {
         link(CON, inp);
         CON = null;
+        BBB.off('mousemove');
+        connectionPath.attr({stroke: 'rgba(0, 0, 0, 0)'});
       }
+      return false;
     });
 
     inp.$el.on('mousedown', () => {
@@ -100,6 +116,14 @@ const ProjectFile = CompositeView.extend({
 
   childViewOptions: {links: links},
 
+  events: {
+    'click': () => {
+      CON = null;
+      BBB.off('mousemove');
+      connectionPath.attr({stroke: 'rgba(0, 0, 0, 0)'});
+    }
+  },
+
   elementMove(child, x, y) {
     const i = child.model.get('a');
     if (i === 1) {
@@ -121,11 +145,11 @@ const ProjectFile = CompositeView.extend({
 
     s = Snap(links);
 
-    console.log('may be here linking');
+    const aa = genPath(0, 0, 0, 0);
+    connectionPath = s.path(aa);
+    connectionPath.attr({stroke: 'rgba(0, 0, 0, 0)', fill: 'none'});
 
-    setTimeout(() => {
-      //link(ports['a:a:a'], ports['a:a:b']);
-    }, 10); 
+    BBB = this.$el;
   },
 });
 
