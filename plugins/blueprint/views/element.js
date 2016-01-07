@@ -28,14 +28,16 @@ const ElementView = LayoutView.extend({
       });
 
       this.magic1 = new InOuts({
-        collection: new Collection([{title: 'asd', rr: 'b'}, {title: 'add', rr: 'g'}, {title: 'ad', rr: '3'}]),
+        collection: new Collection(this.model.get('ext').inputs),
         childViewOptions: {links: this.links},
       });
       this.inputs.show(this.magic1);
-      this.magic = new InOuts({collection: new Collection([{title: 'asd', rr: 'a'}, {'title': 'gasdf', rr: 'd'}]),
+      this.magic = new InOuts({collection: new Collection(this.model.get('ext').outputs),
         childViewOptions: {links: this.links},
       });
       this.outputs.show(this.magic);
+
+      this.$el.find('.bidy').append(this.model.get('ext').html);
 
   },
   events: {

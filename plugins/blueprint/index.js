@@ -7,6 +7,9 @@ const App = require('../../app/app');
 const interact = require('interact.js');
 const Snap = require('snapsvg');
 
+const Switch = require('./ext/switch.js');
+const Lamp = require('./ext/lamp.js');
+
 const Element = require('./views/element');
 
 let s;
@@ -99,6 +102,11 @@ const link = function(input, output) {
     ll.path.attr('d', aa);
   });
 
+  input.model.attributes.on('message', (val) => {
+    console.log('EMITED!', val);
+    output.model.attributes.emit(val);
+  });
+
   gas.push(ll);
 }
 
@@ -135,7 +143,7 @@ const ProjectFile = CompositeView.extend({
     this.connection.attr('d', aa);
   },
 
-  collection: new Collection([{a: 1, pos: [30, 40]}, {a: 2, pos: [400, 230]}]),
+  collection: new Collection([{a: 1, pos: [30, 40], ext: new Switch()}, {a: 2, pos: [400, 230], ext: new Lamp()}]),
   onRender() {
     const links = this.$el.find('.links').get(0);
     setTimeout(() => {
