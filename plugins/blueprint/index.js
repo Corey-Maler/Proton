@@ -9,6 +9,7 @@ const Snap = require('snapsvg');
 
 const Switch = require('./ext/switch.js');
 const Lamp = require('./ext/lamp.js');
+const AndExt = require('./ext/and.js');
 
 const Element = require('./views/element');
 
@@ -143,7 +144,12 @@ const ProjectFile = CompositeView.extend({
     this.connection.attr('d', aa);
   },
 
-  collection: new Collection([{a: 1, pos: [30, 40], ext: new Switch()}, {a: 2, pos: [400, 230], ext: new Lamp()}]),
+  collection: new Collection([
+    {a: 1, pos: [30, 40], ext: new Switch()},
+    {a: 3, pos: [30, 140], ext: new Switch()},
+    {a: 2, pos: [400, 230], ext: new Lamp()},
+    {a: 54, pos: [30, 300], ext: new AndExt()}
+  ]),
   onRender() {
     const links = this.$el.find('.links').get(0);
     setTimeout(() => {

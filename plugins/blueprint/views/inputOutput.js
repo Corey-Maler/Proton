@@ -1,7 +1,8 @@
 const {ItemView} = require('backbone.marionette');
+const t = require('../../../app/t');
 
 const InOut = ItemView.extend({
-  template: false,
+  template: t('plugins/blueprint.inout'),
   className: 'input',
   onRender() {
 

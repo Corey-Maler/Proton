@@ -36,7 +36,6 @@ const ProjectFile = ItemView.extend({
 					App.addProvider('COM', this.provider);
 	        serialPort.on('data', (data) => {
 	          this.writeToTerm(data);
-
 	        });
 	      }
 	    });
@@ -67,7 +66,7 @@ const ProjectFile = ItemView.extend({
       ports.forEach((port) => {
         const option = $('<option>');
         option.text(port.comName);
-        option.attr('value', '\\\\.\\' + port.comName);
+        option.attr('value', port.comName);
         this.$el.find('.js-ports').append(option);
       });
     });
