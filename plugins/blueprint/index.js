@@ -114,6 +114,16 @@ const link = function(input, output) {
 const ProjectFile = CompositeView.extend({
 	template: t('plugins/blueprint'),
   initialize() {
+    // const ASD = App.getProvider('ss');
+    // console.log('ASD ++++++++++', ASD);
+
+    // const AA = ASD.get('ext');
+
+    /*
+    this.collection.add({
+      a: 4, pos: [320, 40], ext: new AA()
+    });
+    */
     console.log('ssbus initialize >>> ', this);
   },
   childView:  Element,
@@ -130,7 +140,21 @@ const ProjectFile = CompositeView.extend({
       CON = null;
       BBB.off('mousemove');
       connectionPath.attr({stroke: 'rgba(0, 0, 0, 0)'});
-    }
+    }, 
+    'click .js-add-button': 'add_button',
+    'click .js-add-led': 'add_led'
+  },
+
+  add_button() {
+    this.collection.add({
+      a: 55, pos: [50, 50], ext: new Switch()
+    });
+  },
+
+  add_led() {
+    this.collection.add({
+      a: 5532, pos: [100, 100], ext: new Lamp()
+    });
   },
 
   elementMove(child, x, y) {
@@ -151,6 +175,11 @@ const ProjectFile = CompositeView.extend({
     {a: 54, pos: [30, 300], ext: new AndExt()}
   ]),
   onRender() {
+
+    this.$el.find('.add .btn').click(function() {
+      $(this).parent().toggleClass('full');
+    });
+
     const links = this.$el.find('.links').get(0);
     setTimeout(() => {
     links.setAttribute('width', this.$el.width());
@@ -164,7 +193,8 @@ const ProjectFile = CompositeView.extend({
     connectionPath.attr({stroke: 'rgba(0, 0, 0, 0)', fill: 'none'});
 
     BBB = this.$el;
-  },
+
+    },
 });
 
 module.exports = ProjectFile;
