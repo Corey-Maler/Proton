@@ -4,6 +4,7 @@ const {Model, Collection} = require('backbone');
 const t = require('../../app/t');
 const App = require('../../app/app');
 
+
 const interact = require('interact.js');
 const Snap = require('snapsvg');
 
@@ -179,6 +180,39 @@ const ProjectFile = CompositeView.extend({
     this.$el.find('.add .btn').click(function() {
       $(this).parent().toggleClass('full');
     });
+
+    const $groups = this.$el.find('.add .groups');
+
+    const plugins = require('../../plugins/index');
+    console.log('EXT >>> ',plugins , plugins.plugins);
+    const ext = plugins.plugins;
+
+    for (let i in ext) {
+      if (ext[i].ext && ext[i].ext.length) {
+        const gr = $('<div>').addClass('group');
+        const $gr_title = $('<div>').addClass('group-title');
+        $gr_title.text(ext[i].name);
+        gr.append($gr_title);
+        $groups.append(gr);
+
+        const $items = $('<div>').addClass('items');
+        gr.append($items);
+
+        for (let j in ext[i].ext) {
+          const asd = ext[i].ext[j];
+          const dd = $('<div>').addClass('item').text(asd.name);
+          dd.click(() => {
+            this.collection.add({
+              a: 5532, pos: [100, 100], ext: new asd.ext()
+            })
+          });
+
+          $items.append(dd);
+        }
+      }
+    } 
+
+
 
     const links = this.$el.find('.links').get(0);
     setTimeout(() => {

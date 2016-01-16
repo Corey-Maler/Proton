@@ -5,6 +5,21 @@ types.com = require('./com');
 types.ssbus = require('./ssbus');
 types.blueprint = require('./blueprint');
 
+const fs = require('fs');
+
+//const jss = fs.readFileSync('./basic/ma');
+
+const a = require('./basic/manifest.json');
+
+for (let i in a.ext) {
+  a.ext[i].ext = require('./basic/' + a.ext[i].file);
+}
+
+const plugins = [];
+plugins.push(a);
+
+console.log('manifest -> ', a);
+
 
 const resolve = function(ext, opts) {
   console.log('ext >> ', ext, types);
@@ -14,5 +29,7 @@ const resolve = function(ext, opts) {
     return new Flat(opts);
   }
 };
+
+resolve.plugins = plugins;
 
 module.exports = resolve;

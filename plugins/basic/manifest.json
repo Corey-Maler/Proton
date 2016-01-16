@@ -1,0 +1,8 @@
+{
+  "name": "basic",
+  "ext": [{
+    "name": "button",
+    "file": "ext/button.js"
+  }]
+
+}
